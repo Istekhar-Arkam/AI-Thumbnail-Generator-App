@@ -1,9 +1,7 @@
 import { MenuIcon, XIcon } from "lucide-react";
 import { useState } from "react";
 import { motion } from "motion/react";
-import { navlinks } from "../data/navlinks";
-import type { INavLink } from "../types";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -29,7 +27,7 @@ export default function Navbar() {
             Generate
           </Link>
           <Link to="/my-generations" className="hover:text-pink-300 transition">
-            My-Generations
+            My Generations
           </Link>
           <Link to="#" className="hover:text-pink-300 transition">
             My Contact
@@ -52,15 +50,21 @@ export default function Navbar() {
           isOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
-        {navlinks.map((link: INavLink) => (
-          <NavLink
-            key={link.name}
-            to={link.href}
-            onClick={() => setIsOpen(false)}
-          >
-            {link.name}
-          </NavLink>
-        ))}
+        <Link onClick={() => setIsOpen(false)} to="/">
+          Home
+        </Link>
+        <Link onClick={() => setIsOpen(false)} to="/generate">
+          Generate
+        </Link>
+        <Link onClick={() => setIsOpen(false)} to="/my-generations">
+          My Generations
+        </Link>
+        <Link onClick={() => setIsOpen(false)} to="#">
+          My Contact
+        </Link>
+        <Link onClick={() => setIsOpen(false)} to="/login">
+          Login
+        </Link>
         <button
           onClick={() => setIsOpen(false)}
           className="active:ring-3 active:ring-white aspect-square size-10 p-1 items-center justify-center bg-pink-600 hover:bg-pink-700 transition text-white rounded-md flex"
