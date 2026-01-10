@@ -42,7 +42,7 @@ export default function HeroSection() {
         </p>
       </motion.a>
       <motion.h1
-        className="text-5xl/17 md:text-6xl/21 font-medium max-w-2xl text-center"
+        className="text-5xl/17 md:text-6xl/21 font-medium max-w-3xl text-center"
         initial={{ y: 50, opacity: 0 }}
         whileInView={{ y: 0, opacity: 1 }}
         viewport={{ once: true }}
