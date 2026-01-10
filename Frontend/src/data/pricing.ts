@@ -6,11 +6,11 @@ export const pricingData: IPricing[] = [
         price: 29,
         period: "month",
         features: [
-            "Access to all basic courses",
-            "Community support",
-            "10 practice projects",
-            "Course completion certificate",
-            "Basic code review"
+            "50 AI Thumbnails/month",
+            "Basic Templates",
+            "Standard Resolution",
+            "No Watermark",
+            "Email Support"
         ],
         mostPopular: false
     },
