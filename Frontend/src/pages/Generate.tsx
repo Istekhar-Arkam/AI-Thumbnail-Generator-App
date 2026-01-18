@@ -9,6 +9,7 @@ import {
 import SoftBackdrop from "../components/SoftBackdrop";
 import AspectRatioSelector from "../components/AspectRatioSelector";
 import StyleSelector from "../components/StyleSelector";
+import ColorSchemeSelector from "../components/ColorSchemeSelector";
 
 const Generate = () => {
   const { id } = useParams();
@@ -17,8 +18,8 @@ const Generate = () => {
   const [thumbnail, setThumbnail] = useState<IThumbnail | null>(null);
   const [loading, setLoading] = useState(false);
   const [aspectRatio, setAspectRatio] = useState<AspectRatio>("16:9");
-  const [colorSchemeId, setColorSchemeId] = useState<String>(
-    colorSchemes[0].id
+  const [colorSchemeId, setColorSchemeId] = useState<string>(
+    colorSchemes[0].id,
   );
   const [style, setStyle] = useState<ThumbnailStyle>("Bold & Graphic");
 
@@ -75,6 +76,10 @@ const Generate = () => {
                   />
                   {/* colorSchemeSelector */}
 
+                  <ColorSchemeSelector
+                    value={colorSchemeId}
+                    onChange={setColorSchemeId}
+                  />
                   {/* Details */}
                   <div className="space-y-2">
                     <label className="block text-sm font-medium">
@@ -85,7 +90,7 @@ const Generate = () => {
                       value={additionalDetails}
                       onChange={(e) => setAdditionalDetails(e.target.value)}
                       rows={3}
-                      placeholder="Add any specific elements, mood, or style preferences..."
+                      placeholder="Add any specific elements, mod, or style preferences..."
                       className="w-full px-4 py-3 rounded-lg border border-white/10 bg-white/6 text-zinc-100 placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-pink-500 resize-none"
                     />
                   </div>
