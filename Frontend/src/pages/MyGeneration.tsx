@@ -3,12 +3,12 @@ import SoftBackdrop from "../components/SoftBackdrop";
 import { type IThumbnail, dummyThumbnails } from "../assets/assets";
 
 const MyGeneration = () => {
-  const [thumbnails, setThumbnails] = useState<IThumbnail>([]);
+  const [thumbnails, setThumbnails] = useState<IThumbnail[]>([]);
   const [loading, setLoading] = useState(false);
 
   const fetchThumbnails = async () => {
-    setThumbnails(dummyThumbnails as unknown as IThumbnail[]);
-    setLoading(false);
+    // setThumbnails(dummyThumbnails as unknown as IThumbnail[]);
+    // setLoading(false);
   };
 
   const handleDownload = (image_url: string) => {
@@ -33,6 +33,31 @@ const MyGeneration = () => {
             View and manage all your AI-generated thumbnails
           </p>
         </div>
+        {/* loading */}
+
+        {loading && (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {Array.from({ length: 6 }).map((_, i) => (
+              <div
+                key={i}
+                className="rounded-2xl bg-white/6 border border-white/10 animate-pulse h-[260px]"
+              ></div>
+            ))}
+          </div>
+        )}
+
+        {/* empty state */}
+
+        {!loading && thumbnails.length === 0 && (
+          <div className="text-center py-24">
+            <h3 className="text-lg font-semibold text-zinc-200">
+              No thumbnails yet
+            </h3>
+            <p className="text-sm text-zinc-400 mt-2">
+              Generate your first thumbnail to see it here
+            </p>
+          </div>
+        )}
       </div>
     </>
   );
