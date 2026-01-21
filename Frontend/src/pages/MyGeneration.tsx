@@ -1,14 +1,22 @@
 import { useEffect, useState } from "react";
 import SoftBackdrop from "../components/SoftBackdrop";
 import { type IThumbnail, dummyThumbnails } from "../assets/assets";
+import { useNavigate } from "react-router-dom";
 
 const MyGeneration = () => {
+  const navigate = useNavigate();
+  const aspectRatioClassMap: Record<string, string> = {
+    "16:9": "aspect-video",
+    "1:1": "aspect-square",
+    "9:16": "aspect=[9/16]",
+  };
+
   const [thumbnails, setThumbnails] = useState<IThumbnail[]>([]);
   const [loading, setLoading] = useState(false);
 
   const fetchThumbnails = async () => {
-    // setThumbnails(dummyThumbnails as unknown as IThumbnail[]);
-    // setLoading(false);
+    setThumbnails(dummyThumbnails as unknown as IThumbnail[]);
+    setLoading(false);
   };
 
   const handleDownload = (image_url: string) => {
@@ -56,6 +64,28 @@ const MyGeneration = () => {
             <p className="text-sm text-zinc-400 mt-2">
               Generate your first thumbnail to see it here
             </p>
+          </div>
+        )}
+        {/* grid Layout */}
+
+        {!loading && thumbnails.length > 0 && (
+          <div className="columns-1 sm:columns-2 lg:columns-3 2xl:columns-4 gap-8">
+            {thumbnails.map((thumb: IThumbnail) => {
+              const aspectClass =
+                aspectRatioClassMap[thumb.aspect_ratio || "16:9"];
+              return (
+                <div
+                  key={thumb._id}
+                  onClick={() => navigate(`/generate/${thumb._id}`)}
+                  className="mb-8 group relative cursor-pointer rounded-2xl bg-white/6 border border-white/10 transition shadow-xl break-inside-avoid"
+                >
+                  {/* image */}
+                  <div
+                    className={`relative overflow-hidden rounded-t-2xl ${aspectClass} bg-black`}
+                  ></div>
+                </div>
+              );
+            })}
           </div>
         )}
       </div>
