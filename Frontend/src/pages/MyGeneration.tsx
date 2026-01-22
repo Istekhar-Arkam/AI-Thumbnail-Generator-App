@@ -82,7 +82,25 @@ const MyGeneration = () => {
                   {/* image */}
                   <div
                     className={`relative overflow-hidden rounded-t-2xl ${aspectClass} bg-black`}
-                  ></div>
+                  >
+                    {thumb.image_url ? (
+                      <img
+                        src={thumb.image_url}
+                        alt={thumb.title}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center text-sm text-zinc-400">
+                        {thumb.isGenerating ? "Generating..." : "No image"}
+                      </div>
+                    )}
+
+                    {thumb.isGenerating && (
+                      <div className="absolute inset-0 bg-black/50 flex items-center justify-center text-sm font-medium text-white">
+                        Generating...
+                      </div>
+                    )}
+                  </div>
                 </div>
               );
             })}
