@@ -88,7 +88,7 @@ export const loginUser = async (req: Request, res: Response) => {
   }
 };
 
-// controllers for User Logout
+// Controllers for User Logout
 
 export const logoutUser = (req: Request, res: Response) => {
   req.session.destroy((error: any) => {
@@ -100,11 +100,16 @@ export const logoutUser = (req: Request, res: Response) => {
   return res.json({ message: "Logout successfully" });
 };
 
-// controllers for verifyUser
+// Controllers for verifyUser
 
 export const verifyUser = async (req: Request, res: Response) => {
   try {
     const { userId } = req.session;
+    const user = await User.findById(userId).select("-password");
+    if (!user) {
+      return res.status(400).json({ message: "User not found" });
+    }
+    return res.json({ user });
   } catch (error: any) {
     console.log(error);
     return res.status(500).json({ message: error.message });
