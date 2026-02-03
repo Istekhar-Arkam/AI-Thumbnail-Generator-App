@@ -7,3 +7,4 @@ export const protect = (req: Request, res: Response, next: NextFunction) => {
   }
   next();
 };
+export default protect;
