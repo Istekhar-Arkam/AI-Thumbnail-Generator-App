@@ -5,6 +5,8 @@ import {
   HarmBlockThreshold,
   HarmCategory,
 } from "@google/genai";
+import ai from "../configs/ai.js";
+import path from "path";
 
 const stylePrompts = {
   "Bold & Graphic":
@@ -98,5 +100,30 @@ export const generateThumbnail = async (req: Request, res: Response) => {
       prompt += `Additional details: ${user_prompt}`;
     }
     prompt += `The thumbnail should be ${aspect_ratio}, visually stunning,and designed to maximize click-through rate.Make it bold ,professional,and impossible to ignore.`;
+
+    // generate the image using the ai model
+
+    const response: any = await ai.models.generateContent({
+      model,
+      contents: [prompt],
+      config: generationConfig,
+    });
+
+    // check if the response is valid
+
+    if (!response?.candidates?.[0]?.content?.parts) {
+      throw new Error("Unexpected response");
+    }
+    const parts = response.candidates[0].content.parts;
+
+    let finalBuffer: Buffer | null = null;
+
+    for (const part of parts) {
+      if (part.inlineData) {
+        finalBuffer = Buffer.from(part.inlineData, "base64");
+      }
+    }
+    const filename = `final-output-${Date.now()}.png`;
+    const filepath = path.join("images", filename);
   } catch (error) {}
 };
