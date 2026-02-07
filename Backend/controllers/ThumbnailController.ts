@@ -152,4 +152,13 @@ export const generateThumbnail = async (req: Request, res: Response) => {
 
 // Controllers for Thumbnail Deletion
 
-export const deleteThumbnail = async (req: Request, res: Response) => {};
+export const deleteThumbnail = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const { userId } = req.session;
+    await Thumbnail.findByIdAndDelete({ _id: id, userId });
+    res.json({ message: "Thumbnail deleted successfully" });
+  } catch (error: any) {
+    res.status(500).json({ message: error.message });
+  }
+};
