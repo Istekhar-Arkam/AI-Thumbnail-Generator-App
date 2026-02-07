@@ -7,6 +7,8 @@ import {
 } from "@google/genai";
 import ai from "../configs/ai.js";
 import path from "path";
+import fs from "fs";
+import { v2 as cloudinary } from "cloudinary";
 
 const stylePrompts = {
   "Bold & Graphic":
@@ -124,6 +126,30 @@ export const generateThumbnail = async (req: Request, res: Response) => {
       }
     }
     const filename = `final-output-${Date.now()}.png`;
-    const filepath = path.join("images", filename);
-  } catch (error) {}
+    const filePath = path.join("images", filename);
+
+    // create the image directory if it doesn't exist
+
+    fs.mkdirSync("images", { recursive: true });
+    fs.writeFileSync(filePath, finalBuffer!);
+
+    const uploadResult = await cloudinary.uploader.upload(filePath, {
+      resource_type: "image",
+    });
+    thumbnail.image_url = uploadResult.url;
+    thumbnail.isGenerating = false;
+    await thumbnail.save();
+
+    res.json({ message: "Thumbnail generated successfully", thumbnail });
+
+    // remove image from local storage
+    fs.unlinkSync(filePath);
+  } catch (error: any) {
+    console.error(error);
+    res.status(500).json({ message: error.message });
+  }
 };
+
+// Controllers for Thumbnail Deletion
+
+export const deleteThumbnail = async (req: Request, res: Response) => {};
