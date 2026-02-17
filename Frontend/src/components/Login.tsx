@@ -1,9 +1,11 @@
 import { useState } from "react";
 import React from "react";
-import SoftBackdrop from "./Softbackdrop";
+import SoftBackdrop from "./SoftBackdrop";
+import { useAuth } from "../context/AuthContext";
+
 const Login = () => {
   const [state, setState] = useState("login");
-
+  const { user, login, signUp } = useAuth();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
