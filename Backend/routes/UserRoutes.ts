@@ -1,12 +1,12 @@
 import express from "express";
 import {
-  getUserThumbnails,
+  getUsersThumbnails,
   getThumbnailbyId,
 } from "../controllers/UserController.js";
 import protect from "../middlewares/auth.js";
 const UserRouter = express.Router();
 
-UserRouter.get("/thumbnails", protect, getUserThumbnails);
+UserRouter.get("/thumbnails", protect, getUsersThumbnails);
 
 UserRouter.get("/thumbnails/:id", protect, getThumbnailbyId);
 

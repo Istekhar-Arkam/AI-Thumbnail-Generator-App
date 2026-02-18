@@ -3,7 +3,7 @@ import Thumbnail from "../models/Thumbnail.js";
 
 // controllers to get all user Thumbnails
 
-export const getUserThumbnails = async (req: Request, res: Response) => {
+export const getUsersThumbnails = async (req: Request, res: Response) => {
   try {
     const { userId } = req.session;
     const thumbnail = await Thumbnail.find({ userId }).sort({ createdAt: -1 });
