@@ -82,7 +82,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
       setUser(null);
       setIsLoggedIn(false);
-
       toast.success(data.message);
     } catch (error) {
       console.error(error);
