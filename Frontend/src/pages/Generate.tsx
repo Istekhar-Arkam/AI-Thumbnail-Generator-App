@@ -10,11 +10,11 @@ import {
 import AspectRatioSelector from "../components/AspectRatioSelector";
 import StyleSelector from "../components/StyleSelector";
 import ColorSchemeSelector from "../components/ColorSchemeSelector";
-import PreviewPanel from "../components/PreviewPanel";
 import { useAuth } from "../context/AuthContext";
 import toast from "react-hot-toast";
 import api from "../configs/api";
 import SoftBackdrop from "../components/SoftBackdrop";
+import PreviewPanel from "../components/PreviewPanel";
 
 const Generate = () => {
   const { id } = useParams();

@@ -1,11 +1,12 @@
 import type { IThumbnail, AspectRatio } from "../assets/assets";
 import { Loader2Icon, DownloadIcon, ImageIcon } from "lucide-react";
+
 const PreviewPanel = ({
   thumbnail,
   isLoading,
   aspectRatio,
 }: {
-  thumbnail: IThumbnail;
+  thumbnail: IThumbnail | null;
   isLoading: boolean;
   aspectRatio: AspectRatio;
 }) => {

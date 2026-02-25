@@ -8,6 +8,6 @@ const UserRouter = express.Router();
 
 UserRouter.get("/thumbnails", protect, getUsersThumbnails);
 
-UserRouter.get("/thumbnails/:id", protect, getThumbnailbyId);
+UserRouter.get("/thumbnail/:id", protect, getThumbnailbyId);
 
 export default UserRouter;
