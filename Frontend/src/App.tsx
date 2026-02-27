@@ -10,26 +10,61 @@ import YtPreview from "./pages/YtPreview";
 import Login from "./components/Login";
 import { useEffect } from "react";
 import { Toaster } from "react-hot-toast";
+import ProtectedRoute from "./configs/ProtectedRoute";
 
 export default function App() {
-
   const { pathname } = useLocation();
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);
-  
+
   return (
     <>
       <Toaster />
       <LenisScroll />
       <Navbar />
       <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/generate" element={<Generate />} />
-        <Route path="/generate/:id" element={<Generate />} />
-        <Route path="/my-generations" element={<MyGeneration />} />
-        <Route path="/preview" element={<YtPreview />} />
+        <Route
+          path="/"
+          element={
+            <ProtectedRoute>
+              <HomePage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/generate"
+          element={
+            <ProtectedRoute>
+              <Generate />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/generate/:id"
+          element={
+            <ProtectedRoute>
+              <Generate />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/my-generations"
+          element={
+            <ProtectedRoute>
+              <MyGeneration />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/preview"
+          element={
+            <ProtectedRoute>
+              <YtPreview />{" "}
+            </ProtectedRoute>
+          }
+        />
         <Route path="/login" element={<Login />} />
       </Routes>
       <Footer />

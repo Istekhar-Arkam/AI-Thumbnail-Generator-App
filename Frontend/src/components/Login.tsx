@@ -15,6 +15,12 @@ const Login = () => {
     password: "",
   });
 
+  useEffect(() => {
+      if (user) {
+        navigate("/");
+      }
+    }, [user]);
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -27,12 +33,6 @@ const Login = () => {
     } else {
       signUp(formData);
     }
-
-    useEffect(() => {
-      if (user) {
-        navigate("/");
-      }
-    }, [user]);
   };
   return (
     <>
