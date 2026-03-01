@@ -48,6 +48,7 @@ const MyGeneration = () => {
       if (!confirm) return;
       const { data } = await api.delete(`/api/thumbnail/delete/${id}`);
       toast.success(data.message);
+      setThumbnails(thumbnails.filter((t) => t._id !== id));
     } catch (error: any) {
       console.log(error);
       toast.error(error?.response?.data?.message || error.message);
@@ -55,8 +56,10 @@ const MyGeneration = () => {
   };
 
   useEffect(() => {
-    fetchThumbnails();
-  }, []);
+    if (isLoggedIn) {
+      fetchThumbnails();
+    }
+  }, [isLoggedIn]);
   return (
     <>
       <SoftBackdrop />
