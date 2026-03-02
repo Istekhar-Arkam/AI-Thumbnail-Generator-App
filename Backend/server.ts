@@ -21,7 +21,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: ["http://localhost:5173", "http://localhost:3000"],
+    origin: ["http://localhost:5173", "http://localhost:3000","https://ai-thumbnail-generator-app-one.vercel.app"],
     credentials: true,
   })
 );
