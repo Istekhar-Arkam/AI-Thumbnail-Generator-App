@@ -16,7 +16,7 @@ export const getUsersThumbnails = async (req: Request, res: Response) => {
 
 // controller to get single Thumbnail of a user
 
-export const getThumbnailbyId = async (req: Request, res: Response) => {
+export const getThumbnailById = async (req: Request, res: Response) => {
   try {
     const { userId } = req.session;
     const { id } = req.params;
